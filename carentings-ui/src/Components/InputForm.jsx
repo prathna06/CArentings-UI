@@ -11,12 +11,9 @@ import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
-
         width: '40%',
-
     },
   }));
-
 
   const categories = [
     {title: 'Cornhole'},
@@ -24,15 +21,12 @@ const useStyles = makeStyles((theme) => ({
     {title: 'Jenga'},
     {title: 'Tag'},
     {title: 'spikeball'},
-
 ];
 
 function InputForm() {
-
     const [eventDate, setEventDate] = useState(dayjs().add(0, 'day'));
     const [Zipcode, setZipcode] = useState('');
     const [Category, setCategory] = useState([]);
-
     const [eventDateError, setEventDateError] = useState(false);
     const [ZipcodeError, setZipcodeError] = useState(false);
     // const [CategoryError, setCategoryError] = useState(false);
@@ -67,11 +61,7 @@ function InputForm() {
 
     const handleSubmit = (e) => {
       e.preventDefault();
-        
-    //   if (eventDate!=null) {
-        
-    //   }
-    //   else
+
       if (!Zipcode) {
         setZipcodeError(true);
         return;
@@ -86,9 +76,11 @@ function InputForm() {
     const classes = useStyles();
     
   return (
-    <FormControl component='form' onSubmit={handleSubmit} className={classes.formControl}>
-       
+    <FormControl component='form' onSubmit={handleSubmit} className={classes.formControl}>     
+    <div> 
+      
         <LocalizationProvider dateAdapter={AdapterDayjs} >
+       
             <DatePicker
                 label="Event Date"
                 value={eventDate}
@@ -96,7 +88,6 @@ function InputForm() {
                 onChange={handleEventDateChange}
                 disablePast
                 error={eventDateError}
-                
             />
         </LocalizationProvider>
 
@@ -105,7 +96,6 @@ function InputForm() {
             Event Date is required
           </Typography>
         )}
-
         <TextField
             label="Zipcode"
             value={Zipcode}
@@ -117,8 +107,6 @@ function InputForm() {
             style={{ marginTop: '1rem' }}
             error={ZipcodeError}
         />
-
-
         {/* <TextField
             label="Category"
             id="filled-hidden-label-normal"
@@ -129,7 +117,6 @@ function InputForm() {
             style={{ marginTop: '1rem' }}
             error={CategoryError}
         /> */}
-
         <Autocomplete
             multiple
             id="tags-outlined"
@@ -148,12 +135,11 @@ function InputForm() {
             />
             )}
         />
-
         <Button variant="contained" color="inherit" type="submit" 
-            style={{ marginTop: '1rem' }}>
+            style={{ marginTop: '1rem',background:"#1C76D2", color:"white" }}>
             Submit
         </Button>
-    
+        </div>
     </FormControl>
     
   );
