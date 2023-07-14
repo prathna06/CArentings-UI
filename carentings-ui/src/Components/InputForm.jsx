@@ -6,14 +6,17 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import {Button, FormControl, TextField, Autocomplete} from '@mui/material';
 import Typography from '@mui/material/Typography';
-import { makeStyles } from '@mui/styles';
+import axios from "axios";
+import { fetchOptionsRequest } from '../Utils/actions/actions';
+import { useSelector, useDispatch } from 'react-redux';
+/* import { makeStyles } from '@mui/styles'; */
+import { useNavigate } from "react-router-dom";
 
-
-const useStyles = makeStyles((theme) => ({
+/* const useStyles = makeStyles((theme) => ({
     formControl: {
         width: '40%',
     },
-  }));
+  })); */
 
   const categories = [
     {title: 'Cornhole'},
@@ -30,7 +33,23 @@ function InputForm() {
     const [eventDateError, setEventDateError] = useState(false);
     const [ZipcodeError, setZipcodeError] = useState(false);
     // const [CategoryError, setCategoryError] = useState(false);
-
+   const [options, setOptions] = useState([]);
+   // const options = useSelector((state) => state.options.options);
+  //  const loading = useSelector((state) => state.options.loading);
+  //  const dispatch = useDispatch();
+/*     React.useEffect(() => {
+        dispatch(fetchOptionsRequest());
+      }, [dispatch]); */
+    const handleInputChange = (event) => {
+      const keyword = event.target.value;
+      axios.get(`https://carenting-api.azurewebsites.net/api/category/lookUp?keyword=${keyword}`)
+        .then(response => {
+          setOptions(response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    };
     const handleEventDateChange = (date) => {
         setEventDateError(false);
         setEventDate(date);
@@ -51,9 +70,30 @@ function InputForm() {
     const handleZipcodeChange = (e) => {
         setZipcodeError(false);
         setZipcode(e.target.value);
+        debugger;
+        axios({
+
+			// Endpoint to send files
+			//url: `https://carenting-api.azurewebsites.net/api/location/+lookUp?keyword={$zipcode}`,
+			 url : `https://carenting-api.azurewebsites.net/api/location/lookUp?keyword=${e.target.value}`,
+            method: "GET",
+			headers: {
+
+				// Add any auth token here
+				authorization: "your token comes here",
+			},
+
+			
+		})
+
+			
+			.then((res) => { })
+
+			// Catch errors if any
+			.catch((err) => { });
     
     };
-    
+ 
     const handleCategoryChange = (e, value) => {
         // setCategoryError(false);
         setCategory(value);
@@ -73,10 +113,10 @@ function InputForm() {
       }
     };
 
-    const classes = useStyles();
+ /*    const classes = useStyles(); */
     
   return (
-    <FormControl component='form' onSubmit={handleSubmit} className={classes.formControl}>     
+    <FormControl component='form' onSubmit={handleSubmit} /* className={classes.formControl} */>     
     <div> 
       
         <LocalizationProvider dateAdapter={AdapterDayjs} >
@@ -118,24 +158,19 @@ function InputForm() {
             error={CategoryError}
         /> */}
         <Autocomplete
-            multiple
-            id="tags-outlined"
-            options={categories}
-            value={Category}
-            getOptionLabel={(option) => option.title}
-            onChange={handleCategoryChange}
-            // defaultValue={[Category]}
-            filterSelectedOptions
-            style={{ marginTop: '1rem' }}
-            renderInput={(params) => (
-            <TextField
-                {...params}
-                label="Items"
-                placeholder="Categories"
-            />
-            )}
+        options={options}
+        getOptionLabel={option => option.label}
+      // getOptionLabel={(option) => option.label}
+        renderInput={params => (
+          <TextField
+            {...params}
+            label="Search"
+            variant="outlined"
+            onChange={handleInputChange}
+          />
+        )}
         />
-        <Button variant="contained" color="inherit" type="submit" 
+        <Button variant="contained" color="inherit" type="submit"  
             style={{ marginTop: '1rem',background:"#1C76D2", color:"white" }}>
             Submit
         </Button>

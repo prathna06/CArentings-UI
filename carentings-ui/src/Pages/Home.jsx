@@ -5,7 +5,7 @@ import { Box, Grid, Typography } from '@mui/material';
 import Getty from "../Assets/Images/Getty.jpg";
 import img from "../Assets/Images/bgImg.jpeg";
 import InputForm from '../Components/InputForm';
-
+import AppBar from '../Components/AppBar'
 /* const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -29,28 +29,8 @@ const Container = styled('div')({
 export default function ColumnsGrid() {
 
   return (
-  /*   <Box sx={{ flexGrow: 1 }}>
-      <Grid container columns={16}>
-        <Grid item xs={8} >
-          <Item style={{paddingLeft:'70px'}}>
-            <Typography component="div" variant="h4" style={{ paddingTop: '25%',textAlign: 'left',color:"black"}}>
-             Explore, Rent, Enjoy, Repeat
-            </Typography>
-            <Typography variant="h5" color="text.secondary" component="div" style={{ paddingBottom: '3%', textAlign: 'left',color:"black" }}>
-                Play On...
-            </Typography>
-            <div style={{ textAlign:"left"}}>
-            <InputForm/>
-           </div>
-          </Item>
-        </Grid>
-        <Grid item xs={8}>
-          <Item>
-          <img src={Getty} alt="getty" style={{ width: '100%', height: '100%', objectFit: 'cover' }} ></img>
-          </Item>
-        </Grid>
-      </Grid>
-    </Box> */
+    <div>
+ <AppBar/>
     <Container>
     {/* Content of your component */}
     <Typography component="div" variant="h4" style={{ paddingTop: '15%',textAlign: 'left'}}>
@@ -63,5 +43,6 @@ export default function ColumnsGrid() {
             <InputForm/>
            </div>
   </Container>
+  </div>
   );
 }

@@ -1,14 +1,14 @@
 import React from 'react';
 import AppBar from './Components/AppBar'
 import Home from './Pages/Home'
+import Routes from './Routes/Routes';
 
   const App = () => {
     return(
-        <div>
+        <React.Fragment>
         {/*   <h1>hey</h1> */}
-            <AppBar/>
-            <Home/>
-        </div>
+            <Routes/>
+        </React.Fragment>
     )
   }
 
