@@ -11,7 +11,7 @@ import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
-        width: '40%',
+        position: 'absolute',
     },
   }));
 
@@ -77,8 +77,6 @@ function InputForm() {
     
   return (
     <FormControl component='form' onSubmit={handleSubmit} className={classes.formControl}>     
-    <div> 
-      
         <LocalizationProvider dateAdapter={AdapterDayjs} >
        
             <DatePicker
@@ -91,11 +89,12 @@ function InputForm() {
             />
         </LocalizationProvider>
 
-        {eventDateError && !eventDate && (
+        {/* {eventDateError && !eventDate && (
           <Typography variant="body2" color="error" style={{ marginBottom: '1rem' }}>
             Event Date is required
           </Typography>
-        )}
+        )} */}
+
         <TextField
             label="Zipcode"
             value={Zipcode}
@@ -107,6 +106,9 @@ function InputForm() {
             style={{ marginTop: '1rem' }}
             error={ZipcodeError}
         />
+
+
+        
         {/* <TextField
             label="Category"
             id="filled-hidden-label-normal"
@@ -139,7 +141,6 @@ function InputForm() {
             style={{ marginTop: '1rem',background:"#1C76D2", color:"white" }}>
             Submit
         </Button>
-        </div>
     </FormControl>
     
   );
