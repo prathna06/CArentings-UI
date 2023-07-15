@@ -31,7 +31,7 @@ const PageNotFound = (props) => {
           </Typography>
         </Paper>
       </div>
-    </>
+     </>
   );
 };
 
